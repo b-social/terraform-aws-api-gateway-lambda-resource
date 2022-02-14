@@ -4,6 +4,7 @@ resource "aws_api_gateway_deployment" "deployment" {
   triggers = {
     redeployment = sha1(jsonencode([
       var.api_gateway_resource,
+      aws_api_gateway_resource.lambda_resource,
       aws_api_gateway_method.any,
       aws_api_gateway_integration.lambda_integration
     ]))
